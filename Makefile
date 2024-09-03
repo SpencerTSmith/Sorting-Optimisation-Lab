@@ -7,11 +7,11 @@
 
 
 # Uncomment the file you want to test
-FILE_TST=./src/test_var000.c # modify
-#FILE_TST=test_var001.c
-#FILE_TST=test_var002.c
-#FILE_TST=test_var003.c
-#FILE_TST=test_var004.c
+#FILE_TST=./src/test_var000.c # modify
+FILE_TST=./src/test_var001.c
+#FILE_TST=./src/test_var002.c
+#FILE_TST=./src/test_var003.c
+#FILE_TST=./src/test_var004.c
 # ...
 #FILE_TST=test_var999.c
 
@@ -44,7 +44,9 @@ build-timer:
 dump-asm:
 	gcc $(CFLAGS) -DCOMPUTE_NAME=$(NAME_TST) -S $(FILE_TST)
 
-
+run:
+	./run_timer.x
+	./run_verifier.x
 
 clean:
 	rm -f *.o *.x *~ *.s
