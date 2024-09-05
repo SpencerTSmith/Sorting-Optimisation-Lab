@@ -1,0 +1,18 @@
+8/27/24 
+meet and setup the environments.
+
+8/29/24
+planned what algorithms and divided the work
+Luis- merge.
+Spencer- Quick sort.
+Rajat- Selection sort.
+
+9/03/24
+planned optimization
+Luis- Recursive into threads.
+Spencer- Dynamic partition and assign to threads. 
+Rajat- Remove coppying of elements.
+
+9/5/24
+Tested algorithms without optimization and updated makefile for getting files
+
