@@ -1,10 +1,10 @@
-#include <stdbool.h>
-#include <stdio.h>
 #include <string.h>
 
 #ifndef COMPUTE_NAME
 #define COMPUTE_NAME baseline
 #endif
+
+// NOTE(spencer): For arrays < 32, bubble sort actually has a higher throughput!
 
 // all straight from wikipedia for now
 int partition(float *x, int low, int high) {
