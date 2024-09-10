@@ -10,7 +10,8 @@
 #FILE_TST=./src/test_var000.c # modify
 #FILE_TST=./src/test_var001.c # better quick sort
 #FILE_TST=./src/test_var100.c # basic quicksort
-FILE_TST=./src/test_var101.c # hoare partition quicksort
+#FILE_TST=./src/test_var101.c # hoare partition quicksort
+FILE_TST=./src/test_var102.c # no copy
 #FILE_TST=./src/test_var004.c
 # ...
 #FILE_TST=test_var999.c
@@ -27,7 +28,7 @@ NAME_REF=compute_ref # leave this alone
 NAME_TST=compute_tst # also leave this alone
 
 
-all: build-verifier build-timer
+all: clean build-verifier build-timer run
 
 build-verifier:
 	gcc $(CFLAGS_DEBUG) -DCOMPUTE_NAME_REF=$(NAME_REF)  -DCOMPUTE_NAME_TST=$(NAME_TST) -c ./src/verifier.c -o verifier.o
