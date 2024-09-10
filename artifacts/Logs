@@ -14,5 +14,10 @@ Spencer- Dynamic partition and assign to threads.
 Rajat- Remove coppying of elements.
 
 9/5/24
-Tested algorithms without optimization and updated makefile for getting files
+Tested algorithms without optimization and updated makefile for getting files.
+
+9/10/24
+Figured out code to graph the performance of the algorithms.
+finished optimizing the code. 
+started assigning ranges for different algorithms.
 
