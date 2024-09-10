@@ -124,8 +124,7 @@ void COMPUTE_NAME( int m0,
 
   int bsize;
   double s = (double) m0;
-  for( int i0 = 0; i0 < m0; ++i0 ){
-    y[i0] = x[i0];}
+  memcpy(y,x,sizeof(float) * m0);
   
   bsize = (int) sqrt(m0);
   BlockSort(y,m0,bsize);
