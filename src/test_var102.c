@@ -1,48 +1,44 @@
+#include <string.h>
+
 #ifndef COMPUTE_NAME
 #define COMPUTE_NAME baseline
 #endif
 
-// Hoare partion scheme, order of magnitude faster on the largest default array
-// size!
-int partition(float *x, int *indxs, int low, int high) {
-    float pivot = x[low];
+// Using old partition as it doesn't actually seem to be faster?
 
-    int i = low - 1;
-    int j = high + 1;
+//
+int partition(float *x, int low, int high) {
+    // naive pivot choice... optimizations?
+    float pivot = x[high];
 
-    while (1) {
-        do {
+    int i = low;
+
+    for (int j = low; j <= high - 1; j++) {
+        if (x[j] <= pivot) {
+            float temp = x[i];
+            x[i] = x[j];
+            x[j] = temp;
             i++;
-        } while (x[i] < pivot);
-
-        do {
-            j--;
-        } while (x[j] > pivot);
-
-        if (i >= j)
-            return j;
-
-        float temp = x[i];
-        x[i] = x[j];
-        x[j] = temp;
+        }
     }
+
+    float temp = x[i];
+    x[i] = x[high];
+    x[high] = temp;
+    return i;
 }
 
-void quick_sort(float *x, int *indxs, int low, int high) {
-    if (low >= high || low < 0 || high < 0) {
-        return;
+void quick_sort(float *x, int low, int high) {
+    if (low < high) {
+        int part_i = partition(x, low, high);
+
+        quick_sort(x, low, part_i - 1);
+        quick_sort(x, part_i + 1, high);
     }
-
-    int part_i = partition(x, indxs, low, high);
-
-    quick_sort(x, indxs, low,
-               part_i); // we include the pivot in the lower portion
-    quick_sort(x, indxs, part_i + 1, high);
 }
 
 // quick sort!
 void COMPUTE_NAME(int m0, float *x, float *y) {
-    // how is this allowed, c standard?
-    int indxs[m0];
-    quick_sort(x, indxs, 0, m0 - 1);
+    memcpy(y, x, sizeof(float) * m0);
+    quick_sort(y, 0, m0 - 1);
 }

@@ -12,7 +12,8 @@
 
 #FILE_TST=./src/test_var100.c # basic quicksort
 #FILE_TST=./src/test_var101.c # hoare partition quicksort
-#FILE_TST=./src/test_var102.c # no copy
+#FILE_TST=./src/test_var102.c # change recursion check
+FILE_TST=./src/test_var103.c # sort indexes to avoid copy
 
 #FILE_TST=./src/test_var200.c
 #FILE_TST=./src/test_var200.c
@@ -20,7 +21,7 @@
 
 #FILE_TST=./src/test_var300.c
 #FILE_TST=./src/test_var301.c
-FILE_TST=./src/test_var302.c
+#FILE_TST=./src/test_var302.c
 
 # Uncomment where you want output to be
 #FILE_OUT=./data/test_out000.csv
@@ -29,6 +30,7 @@ FILE_TST=./src/test_var302.c
 #FILE_OUT=./data/test_out100.csv
 #FILE_OUT=./data/test_out101.csv
 #FILE_OUT=./data/test_out102.csv
+FILE_OUT=./data/test_out103.csv
 
 #FILE_OUT=./data/test_out200.csv
 #FILE_OUT=./data/test_out200.csv
@@ -36,7 +38,7 @@ FILE_TST=./src/test_var302.c
 
 #FILE_OUT=./data/test_out300.csv
 #FILE_OUT=./data/test_out301.csv
-FILE_OUT=./data/test_out302.csv
+#FILE_OUT=./data/test_out302.csv
 
 FILE_REF=./src/baseline.c # Once you have a correct and faster variant you might want to replace this.
 
