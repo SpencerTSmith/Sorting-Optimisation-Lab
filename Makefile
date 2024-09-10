@@ -9,13 +9,34 @@
 # Uncomment the file you want to test
 #FILE_TST=./src/test_var000.c # modify
 #FILE_TST=./src/test_var001.c # better quick sort
+
 #FILE_TST=./src/test_var100.c # basic quicksort
 #FILE_TST=./src/test_var101.c # hoare partition quicksort
-FILE_TST=./src/test_var102.c # no copy
-#FILE_TST=./src/test_var004.c
-# ...
-#FILE_TST=test_var999.c
+#FILE_TST=./src/test_var102.c # no copy
 
+#FILE_TST=./src/test_var200.c
+#FILE_TST=./src/test_var200.c
+#FILE_TST=./src/test_var200.c
+
+#FILE_TST=./src/test_var300.c
+#FILE_TST=./src/test_var301.c
+FILE_TST=./src/test_var302.c
+
+# Uncomment where you want output to be
+#FILE_OUT=./data/test_out000.csv
+#FILE_OUT=./data/test_out001.csv
+
+#FILE_OUT=./data/test_out100.csv
+#FILE_OUT=./data/test_out101.csv
+#FILE_OUT=./data/test_out102.csv
+
+#FILE_OUT=./data/test_out200.csv
+#FILE_OUT=./data/test_out200.csv
+#FILE_OUT=./data/test_out200.csv
+
+#FILE_OUT=./data/test_out300.csv
+#FILE_OUT=./data/test_out301.csv
+FILE_OUT=./data/test_out302.csv
 
 FILE_REF=./src/baseline.c # Once you have a correct and faster variant you might want to replace this.
 
@@ -46,8 +67,8 @@ dump-asm:
 	gcc $(CFLAGS) -DCOMPUTE_NAME=$(NAME_TST) -S $(FILE_TST)
 
 run:
-	./run_timer.x
-	./run_verifier.x
+	./run_timer.x 16 256 16 1 $(FILE_OUT)
+	./run_verifier.x 16 256 16 1
 
 clean:
 	rm -f *.o *.x *~ *.s

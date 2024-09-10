@@ -43,7 +43,6 @@ void quick_sort(float *x, int low, int high) {
 
 // quick sort!
 void COMPUTE_NAME(int m0, float *x, float *y) {
-    quick_sort(x, 0, m0 - 1);
-
     memcpy(y, x, sizeof(float) * m0);
+    quick_sort(y, 0, m0 - 1);
 }
