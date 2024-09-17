@@ -16,5 +16,8 @@ for file in file_names:
     df = pd.read_csv('./' + file)
     plt.plot(df['size'], df['throughput'], label = str(file))
 plt.legend(loc = "best")
+
+plt.savefig(f"{argv[-1]}", format = "png")
+
 plt.show()
 
