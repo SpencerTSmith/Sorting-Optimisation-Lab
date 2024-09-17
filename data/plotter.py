@@ -2,8 +2,13 @@
 import os
 import pandas as pd
 from matplotlib import pyplot as plt
+from sys import argv
 
-file_names = os.listdir('./')
+
+if argv[1]:
+    file_names = argv[1:]
+else: 
+    file_names = os.listdir('./')
 
 file_names = [file for file in file_names if '.csv' in file]
 
