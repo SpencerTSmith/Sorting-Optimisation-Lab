@@ -1,0 +1,29 @@
+Self Assessment as a Team
+
+1.What was the work that was done
+
+-- to be added by Spencer
+
+-- to be added by Luis
+
+We tried to refine the optimization of selection sort using parallelization of the inner loop for finding the minimum element in the unsorted array. We also removed the initial loop copying and modified the sort to populate the output array while we were sorting the input array. We tried to eliminate the execution of the copying elements from the input to the output array. We also removed the branching conditions for finding the minimum element.
+
+2.How would you distribute the points amongst your teammates
+
+We would distribute the team points as (33/33/33)
+
+3.How did your original statement of work line up with what was done?
+
+The original statement of work was about optimizing the sorting loops, we spent a lot of brainstorming sessions figuring out what we can do to optimize. We first tried to go for the options related to modifications of the loop but that did not work as expected. We then explored other options including memory copy and parallel programming
+
+4.How much time (and/or effort) did this take?
+
+It was a collective effort of around 3 weeks. We worked on different parts of the assignment and kept using git lab as the version control and merging of tasks.
+
+5.How was the time (and/or effort) distributed across the task and team members?
+
+We would create checkpoints for each week after proper discussion. We each divided one sorting algorithm and worked on the refinements. We would discuss any issues or problems in our weekly checkpoint meeting and try to mitigate any issues or roadblocks that we come across.
+
+6.What would you do differently next time?
+
+Next time we will be more analytical in our approach and try to see a bit ahead and understand that we might not waste time on implementations that will not give better results. We should have started our approach with parallel programming and not with modification of loop structures.
