@@ -22,6 +22,7 @@ FILE_TST=./src/test_var103.c # threaded
 #FILE_TST=./src/test_var300.c
 #FILE_TST=./src/test_var301.c
 #FILE_TST=./src/test_var302.c
+#FILE_TST=./src/test_var303.c
 
 
 #FILE_TST=./src/master_sort.c
@@ -33,8 +34,8 @@ FILE_TST=./src/test_var103.c # threaded
 #FILE_OUT=./data/test_out100.csv
 #FILE_OUT=./data/test_out101.csv
 #FILE_OUT=./data/test_out102.csv
-#FILE_OUT=./data/test_out103.csv
-FILE_OUT=./data/test_out103-1.csv
+FILE_OUT=./data/test_out103.csv
+#FILE_OUT=./data/test_out103-1.csv
 
 #FILE_OUT=./data/test_out200.csv
 #FILE_OUT=./data/test_out200.csv
@@ -43,6 +44,7 @@ FILE_OUT=./data/test_out103-1.csv
 #FILE_OUT=./data/test_out300.csv
 #FILE_OUT=./data/test_out301.csv
 #FILE_OUT=./data/test_out302.csv
+#FILE_OUT=./data/test_out303.csv
 
 
 #FILE_OUT=./data/master.csv
@@ -61,22 +63,21 @@ NAME_TST=compute_tst # also leave this alone
 all: clean build-verifier build-timer run
 
 build-verifier:
-	gcc $(CFLAGS_DEBUG) -DCOMPUTE_NAME_REF=$(NAME_REF)  -DCOMPUTE_NAME_TST=$(NAME_TST) -c ./src/verifier.c -o verifier.o
-	gcc $(CFLAGS_DEBUG) -DCOMPUTE_NAME=$(NAME_REF) -c $(FILE_REF) -o FILE_REF.o
-	gcc $(CFLAGS_DEBUG) -DCOMPUTE_NAME=$(NAME_TST) -c $(FILE_TST) -o FILE_TST.o
-	gcc $(CFLAGS_DEBUG) -lm FILE_REF.o FILE_TST.o verifier.o -o ./run_verifier.x
+	gcc $(CFLAGS_DEBUG) -DCOMPUTE_NAME_REF=$(NAME_REF)  -DCOMPUTE_NAME_TST=$(NAME_TST) -c ./src/verifier.c -o verifier.o -lm -fopenmp
+	gcc $(CFLAGS_DEBUG) -DCOMPUTE_NAME=$(NAME_REF) -c $(FILE_REF) -o FILE_REF.o -lm -fopenmp
+	gcc $(CFLAGS_DEBUG) -DCOMPUTE_NAME=$(NAME_TST) -c $(FILE_TST) -o FILE_TST.o -lm -fopenmp
+	gcc $(CFLAGS_DEBUG) FILE_REF.o FILE_TST.o verifier.o -o  ./run_verifier.x -lm -fopenmp
 
 
 build-timer:
-	gcc $(CFLAGS)  -DCOMPUTE_NAME_TST=$(NAME_TST) -c ./src/timer.c -o timer.o
-	gcc $(CFLAGS) -DCOMPUTE_NAME=$(NAME_TST) -c $(FILE_TST) -o FILE_TST.o
-	gcc -lm  FILE_TST.o timer.o -o ./run_timer.x
+	gcc $(CFLAGS)  -DCOMPUTE_NAME_TST=$(NAME_TST) -c ./src/timer.c -o timer.o -lm -fopenmp
+	gcc  FILE_TST.o timer.o -o ./run_timer.x -lm -fopenmp
 
 dump-asm:
 	gcc $(CFLAGS) -DCOMPUTE_NAME=$(NAME_TST) -S $(FILE_TST)
 
 run:
-	./run_timer.x 16 102400 10240 1 $(FILE_OUT)
+	./run_timer.x 16 50000 1024 1 $(FILE_OUT)
 	#./run_timer.x 16 1024 16 1 $(FILE_OUT)
 	./run_verifier.x 16 256 16 1
 
