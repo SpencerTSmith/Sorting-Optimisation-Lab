@@ -22,40 +22,36 @@ This lab assignment integrates concepts from several courses in our computer sci
 \subsection{Variant 1: Optimized Quicksort}
 
 \subsubsection{Changes Made}
-In this variant, we implemented an optimized version of the Quicksort algorithm. The main changes include:
+In this variant, we implemented an optimized version of the given Bubblesort. The main change is.:
 \begin{itemize}
-    \item Using a median-of-three method for pivot selection
-    \item Implementing an insertion sort for small subarrays (n < 10)
-    \item Utilizing tail recursion elimination
+    \item Checking if a swap has happened so it does less operations
 \end{itemize}
 
 \subsubsection{Expected Results}
-We expect to see improved performance, especially for larger datasets. The median-of-three pivot selection should provide better partitioning, reducing the likelihood of worst-case scenarios. The insertion sort for small subarrays should decrease the overhead of recursion for small inputs, and tail recursion elimination should help in reducing stack usage.
+We expect to see improved performance, We reduce the number of steps  the algorithm takes
 
 \subsubsection{Performance Analysis}
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=0.8\columnwidth]{placeholder_plot1.png}
-%    \caption{Performance plot for Optimized Quicksort}
-%    \label{fig:variant1_plot}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{var0.png}
+    \caption{Performance plot for Optimized Bubblesort}
+    \label{fig:variant1_plot}
+\end{figure}
 
-The performance plot shows a significant improvement in execution time compared to the baseline Quicksort implementation. We observe that:
+The performance plot shows  improvement in execution time compared to the baseline.
 \begin{itemize}
-    \item For small input sizes (n < 1000), the optimized version performs slightly better due to the insertion sort optimization.
-    \item For larger inputs, we see a more pronounced improvement, with the optimized version consistently outperforming the baseline.
-    \item The performance gain increases with input size, suggesting that our optimizations are particularly effective for larger datasets.
+    \item For small input sizes it is significantly quicker.
+    \item For larger input sizes it is the same as the baseline
 \end{itemize}
 
 \subsubsection{Potential Improvements}
 To further enhance this variant, we could:
 \begin{itemize}
-    \item Experiment with different thresholds for switching to insertion sort
-    \item Implement a three-way partitioning scheme to handle duplicate elements more efficiently
-    \item Explore cache-friendly memory access patterns to improve performance on modern hardware
+    \item  Unroll the loop
+
 \end{itemize}
 
-\subsection{Variant 2: Hybrid Merge-Insertion Sort}
+\subsection{Variant 2: Quicksort}
 
 \subsubsection{Changes Made}
 For this variant, we created a hybrid algorithm combining Merge Sort and Insertion Sort:
@@ -69,12 +65,12 @@ For this variant, we created a hybrid algorithm combining Merge Sort and Inserti
 We anticipate this hybrid approach to leverage the strengths of both algorithms. Merge Sort provides a stable O(n log n) performance for larger inputs, while Insertion Sort is highly efficient for small, nearly-sorted subarrays. The in-place merge should help in reducing the space complexity.
 
 \subsubsection{Performance Analysis}
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=0.8\columnwidth]{placeholder_plot2.png}
-%    \caption{Performance plot for Hybrid Merge-Insertion Sort}
-%    \label{fig:variant2_plot}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{var1.png}
+    \caption{Performance plot for optimized Quicksort}
+    \label{fig:variant2_plot}
+\end{figure}
 
 The performance plot reveals interesting characteristics of our hybrid algorithm:
 \begin{itemize}
@@ -90,30 +86,72 @@ To enhance this variant further, we could:
     \item Implement a more efficient in-place merge algorithm to reduce the performance hit for large inputs
     \item Explore parallelization of the merge step for multi-core systems
 \end{itemize}
-\subsection{Variant 3: }
+\subsection{Variant 3: Selection Sort }
 
 \subsubsection{Changes Made}
-In this variant, we implemented an optimized version of the Quicksort algorithm. The main changes include:
+In this variant, we optimized the cloning of the arrays and implemented selection sort
 \begin{itemize}
-    \item Using a median-of-three method for pivot selection
-    \item Implementing an insertion sort for small subarrays (n < 10)
-    \item Utilizing tail recursion elimination
+    \item The baseline code had a loop copying mechanism before the sorting even started. It first copies the items from list x to y and then performs sorting. We removed this initial loop copying of the list and modified the sorting to sort on the input array and copy the result in the put array while the sorting loop was processing. 
+    \item We tried to use OpenMP directives for the inner loop parallelization by dividing the search for minimum element across multiple threads. We also added a critical section to make sure only one thread updates the minimum value.
+    \item  This was done on top of the parallelism part where we removed the if conditionals for the minimum value check. We wanted to not branch execution due to the if statement.
 \end{itemize}
 
 \subsubsection{Expected Results}
-We expect to see improved performance, especially for larger datasets. The median-of-three pivot selection should provide better partitioning, reducing the likelihood of worst-case scenarios. The insertion sort for small subarrays should decrease the overhead of recursion for small inputs, and tail recursion elimination should help in reducing stack usage.
+We expect to see improved performance, especially for small datasets, and an overall improvement from the base bubblesort.
+\subsubsection{Performance Analysis}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{var2.png}
+    \caption{Performance plot for Optimized Selectionsort}
+    \label{fig:variant3_plot}
+\end{figure}
+
+The performance plot shows improvement in execution time compared to the baseline bubblesort  implementation. We observe that:
+\begin{itemize}
+    \item For small input sizes a speedup in time
+    \item Parallelizing for small sizes is not effective
+\end{itemize}
+
+\subsubsection{Potential Improvements}
+To further enhance this variant, we could:
+\begin{itemize}
+    \item Parallelize the outer loop
+    \item Unroll loops
+    \item Improve memory access.
+\end{itemize}
+
+\subsection{Variant 4: Merge sort:}
+
+Merge sort is an algorithm with the divide-and-conquer approach. it works by recursively dividing the input, sorting the smaller sections and merging them together.
+
+\subsubsection{Changes Made}
+In this variant, we implemented a optimized version of metgesort
+\begin{itemize}
+    \item Var300 : Created mergesort base algorythm
+    \item Var301: Optimized mergsort by adding insertion sort for small arrays.
+    \item Var 302: Tried to optimize mergesort by converting to blocksrot with size $\sqrt(n)$
+    \item Var 303: Made the 302 implementation of mergesort into a parallel version.
+\end{itemize}
+
+\subsubsection{Expected Results}
+\begin{itemize}
+	\item Var300: We expected an improvement from the base sort
+	\item Var301: We expected an improvement of speed for small sizes
+	\item Var302: We expected an improvement for large arrays
+	\item Var303: We expected an improvement for very large arrays compared to the previous variants.
+\end{itemize}
 
 \subsubsection{Performance Analysis}
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=0.8\columnwidth]{placeholder_plot1.png}
-%    \caption{Performance plot for Optimized Quicksort}
-%    \label{fig:variant1_plot}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{var3.png}
+    \caption{Performance plot for Optimized Mergesort}
+    \label{fig:variant4_plot}
+\end{figure}
 
-The performance plot shows a significant improvement in execution time compared to the baseline Quicksort implementation. We observe that:
+The performance plot shows a significant improvement in execution time compared to the baseline  implementation. We observe that:
 \begin{itemize}
-    \item For small input sizes (n < 1000), the optimized version performs slightly better due to the insertion sort optimization.
+    \item For small input sizes the optimized version performs slightly better due to the insertion sort optimization.
     \item For larger inputs, we see a more pronounced improvement, with the optimized version consistently outperforming the baseline.
     \item The performance gain increases with input size, suggesting that our optimizations are particularly effective for larger datasets.
 \end{itemize}
@@ -121,47 +159,30 @@ The performance plot shows a significant improvement in execution time compared 
 \subsubsection{Potential Improvements}
 To further enhance this variant, we could:
 \begin{itemize}
-    \item Experiment with different thresholds for switching to insertion sort
-    \item Implement a three-way partitioning scheme to handle duplicate elements more efficiently
-    \item Explore cache-friendly memory access patterns to improve performance on modern hardware
+    \item Experiment with different thresholds for initializing new threads.
+    \item Implement a parallel version of the blocksort approach.
+    \item Reduce the work made by the for loops.
+    \item Addign all memory before recursion and threading starts.
 \end{itemize}
 
-\subsection{Variant 4:}
+\section{Master}
+
+After analyzing all of the variants and comparing the throughputs we combined the best and assigned them to their most optimal sizes.
 
 \subsubsection{Changes Made}
-In this variant, we implemented an optimized version of the Quicksort algorithm. The main changes include:
 \begin{itemize}
-    \item Using a median-of-three method for pivot selection
-    \item Implementing an insertion sort for small subarrays (n < 10)
-    \item Utilizing tail recursion elimination
+	\item For small input size ($n<32$) use Insertionsort
+	\item For medium input size ($n<40000$) use Quicksort
+	\item For large input size ($n > 40000$) use Parallel Quicksort.
 \end{itemize}
-
-\subsubsection{Expected Results}
-We expect to see improved performance, especially for larger datasets. The median-of-three pivot selection should provide better partitioning, reducing the likelihood of worst-case scenarios. The insertion sort for small subarrays should decrease the overhead of recursion for small inputs, and tail recursion elimination should help in reducing stack usage.
 
 \subsubsection{Performance Analysis}
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=0.8\columnwidth]{placeholder_plot1.png}
-%    \caption{Performance plot for Optimized Quicksort}
-%    \label{fig:variant1_plot}
-%\end{figure}
-
-The performance plot shows a significant improvement in execution time compared to the baseline Quicksort implementation. We observe that:
-\begin{itemize}
-    \item For small input sizes (n < 1000), the optimized version performs slightly better due to the insertion sort optimization.
-    \item For larger inputs, we see a more pronounced improvement, with the optimized version consistently outperforming the baseline.
-    \item The performance gain increases with input size, suggesting that our optimizations are particularly effective for larger datasets.
-\end{itemize}
-
-\subsubsection{Potential Improvements}
-To further enhance this variant, we could:
-\begin{itemize}
-    \item Experiment with different thresholds for switching to insertion sort
-    \item Implement a three-way partitioning scheme to handle duplicate elements more efficiently
-    \item Explore cache-friendly memory access patterns to improve performance on modern hardware
-\end{itemize}
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{var_master.png}
+    \caption{Performance plot for best algorythm}
+    \label{fig:variantmaster_plot}
+\end{figure}
 
 
 \section{Conclusion}
