@@ -2,7 +2,7 @@ Self Assessment as a Team
 
 1.What was the work that was done
 
--- to be added by Spencer
+Implemented quicksort, with different partitioning schemes, as well as a multithreaded variant. As well we created a script to plot the throughput and make comparisons amongst them.
 
 We implemented mergesort and optimized it with insertion sort and parallelization. We also changed how the data was being coppied to a quicker memcopy. 
 
@@ -14,7 +14,7 @@ We would distribute the team points as (33/33/33)
 
 3.How did your original statement of work line up with what was done?
 
-The original statement of work was about optimizing the sorting loops, we spent a lot of brainstorming sessions figuring out what we can do to optimize. We first tried to go for the options related to modifications of the loop but that did not work as expected. We then explored other options including memory copy and parallel programming
+The original statement of work was about optimizing the sorting loops, we spent a lot of brainstorming sessions figuring out what we can do to optimize. We first tried to go for the options related to modifications to the specific algorithms. We then explored other options including parallel programming.
 
 4.How much time (and/or effort) did this take?
 

@@ -19,7 +19,7 @@ This lab assignment integrates concepts from several courses in our computer sci
 
 \section{Refinements}
 
-\subsection{Variant 1: Optimized Quicksort}
+\subsection{Variant 1: Bubble Sort}
 
 \subsubsection{Changes Made}
 In this variant, we implemented an optimized version of the given Bubblesort. The main change is.:
@@ -54,15 +54,15 @@ To further enhance this variant, we could:
 \subsection{Variant 2: Quicksort}
 
 \subsubsection{Changes Made}
-For this variant, we created a hybrid algorithm combining Merge Sort and Insertion Sort:
+This started as a very basic implementation of Quicksort, but these potential improvements were made:
 \begin{itemize}
-    \item Used Merge Sort as the primary algorithm
-    \item Switched to Insertion Sort for small subarrays (n < 64)
-    \item Implemented an in-place merge function to reduce memory usage
+    \item Implemented Hoare partitioning scheme, but was actually slower. This is probably due to the fact that the data we sorted was completely random and so did not benefit from the new partitioning.
+    \item Changed around some if statements to help branch predictor.
+    \item Implement multithreaded quicksort.
 \end{itemize}
 
 \subsubsection{Expected Results}
-We anticipate this hybrid approach to leverage the strengths of both algorithms. Merge Sort provides a stable O(n log n) performance for larger inputs, while Insertion Sort is highly efficient for small, nearly-sorted subarrays. The in-place merge should help in reducing the space complexity.
+It was expected that the Hoare partition to be faster since it looked like it would do less compares and swaps. As well, the threaded implementation is going to be slower at smaller sizes due to thread spawning overhead.
 
 \subsubsection{Performance Analysis}
 \begin{figure}[H]
@@ -72,19 +72,18 @@ We anticipate this hybrid approach to leverage the strengths of both algorithms.
     \label{fig:variant2_plot}
 \end{figure}
 
-The performance plot reveals interesting characteristics of our hybrid algorithm:
+We can see that there is not too much difference between the first few optimizations.
 \begin{itemize}
-    \item For small inputs (n < 1000), it significantly outperforms the standard Merge Sort due to the Insertion Sort optimization.
-    \item For medium to large inputs, it maintains performance close to or slightly better than standard Merge Sort.
-    \item The in-place merge implementation shows a slight performance hit for very large inputs but provides substantial memory savings.
+    \item Unfortunately, the Hoare partitioning is not actually faster, it seems like it is only better when the data is not completely random.
+    \item The change to comparisons did not seem to have a major effect, we might have expected this since the compiler is probably best at generating fewer branches.
+	\item The threaded implementation starts out worse because of overhead but slowly get better, I expect for very large sizes it is the best.
 \end{itemize}
 
 \subsubsection{Potential Improvements}
 To enhance this variant further, we could:
 \begin{itemize}
-    \item Fine-tune the threshold for switching between Merge Sort and Insertion Sort
-    \item Implement a more efficient in-place merge algorithm to reduce the performance hit for large inputs
-    \item Explore parallelization of the merge step for multi-core systems
+    \item Use a threadpool to offload all thread generating overhead to the start.
+    \item Add some better load balancing so that threads aren't spawned when the partition is very uneven.
 \end{itemize}
 \subsection{Variant 3: Selection Sort }
 
@@ -180,12 +179,20 @@ After analyzing all of the variants and comparing the throughputs we combined th
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\columnwidth]{var_master.png}
-    \caption{Performance plot for best algorythm}
+    \caption{Performance plot for best algorithm}
     \label{fig:variantmaster_plot}
 \end{figure}
 
+The performance plot shows better performance at all problem sizes than any one algorithm. We observe that:
+\begin{itemize}
+    \item For small input sizes insertion sort is very good.
+    \item For larger input sizes quicksort is satisfactory.
+    \item For very large input sizes, when the size counteracts the overhead of starting threads, throughput can increase.
+\end{itemize}
+
 
 \section{Conclusion}
-Our refinements demonstrate significant improvements over baseline sorting implementations. The Optimized Quicksort shows excellent performance for large datasets, while the Hybrid Merge-Insertion Sort provides a good balance of performance across different input sizes with reduced memory usage. These optimizations showcase the practical application of concepts from our computer science curriculum, particularly in algorithm analysis, data structures, and low-level system optimizations. Moving forward, we plan to explore more advanced techniques such as cache-conscious algorithms and parallel sorting methods to push the boundaries of sorting performance.
+With this lab we've learned how to benchmark and improve our algorithms iteratively and to take the best out of each. With our master sort, we use the correct tool for the correct problem size, allowing for optimal performance in all cases. At small sizes we use insertion sort with it's low overhead, for large sizes we use quicksort with it's divide-and-conquer strategy, and for the largest sizes we use parallel quicksort to take advantage of modern cpu's
+
 
 \end{document}
