@@ -4,7 +4,7 @@ Self Assessment as a Team
 
 -- to be added by Spencer
 
--- to be added by Luis
+We implemented mergesort and optimized it with insertion sort and parallelization. We also changed how the data was being coppied to a quicker memcopy. 
 
 We tried to refine the optimization of selection sort using parallelization of the inner loop for finding the minimum element in the unsorted array. We also removed the initial loop copying and modified the sort to populate the output array while we were sorting the input array. We tried to eliminate the execution of the copying elements from the input to the output array. We also removed the branching conditions for finding the minimum element.
 
@@ -18,12 +18,12 @@ The original statement of work was about optimizing the sorting loops, we spent 
 
 4.How much time (and/or effort) did this take?
 
-It was a collective effort of around 3 weeks. We worked on different parts of the assignment and kept using git lab as the version control and merging of tasks.
+It was a collective effort of around 3 weeks. The development of the algorithms was done in the first week. The second week we focoused on optimizing our variants. The last week we tested our implementations and developed the master algorithm.
 
 5.How was the time (and/or effort) distributed across the task and team members?
 
-We would create checkpoints for each week after proper discussion. We each divided one sorting algorithm and worked on the refinements. We would discuss any issues or problems in our weekly checkpoint meeting and try to mitigate any issues or roadblocks that we come across.
+We would create checkpoints for each week after proper discussion. We each divided one sorting algorithm and worked on the refinements. We would discuss any issues or problems in our weekly checkpoint meeting and try to mitigate any issues or roadblocks through our communication channel.
 
 6.What would you do differently next time?
 
-Next time we will be more analytical in our approach and try to see a bit ahead and understand that we might not waste time on implementations that will not give better results. We should have started our approach with parallel programming and not with modification of loop structures.
+Next time we will be more analytical in our approach. We need to distribute work better and be certain that the team mebers understand their tasks. Anoother way in which we could improve is in having more meetings and review the code together. At the end we were effective on te task but more communication would have been helpfull.
